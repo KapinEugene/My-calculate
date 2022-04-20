@@ -4,28 +4,46 @@ import re
 
 
 while(True):
+    count = 0
     is_arabic = True
     expression = input('Введите выражение: ')
+    expression = expression.replace(' ', '')
+    for i in range(len(expression)):
+        if expression[i] == '+' or expression[i] == '-' or expression[i] == '*' or expression[i] == '/':
+            if expression[0] == '-':
+                continue
+            # print(i[1])
+            count += 1
+    try:
+        if count > 1:
+            raise ArithmeticError
+    except ArithmeticError as e:
+        print('Ошибка ввода выражения, попробуйте еще раз')
+        continue
     if '+' in expression:
-        expression = expression.replace(' ', '')
         expression = expression.split('+')
         first_number = expression[0]
         second_number = expression[1]
         operation = '+'
     elif '-' in expression:
-        expression = expression.replace(' ', '')
         expression = expression.split('-')
         first_number = expression[0]
         second_number = expression[1]
+        # if expression[0] != '':
+        #     first_number = expression[0]
+        #     second_number = expression[1]
+        # else:
+        #     first_number = expression[0] + expression[1]
+        #     second_number = expression[2]
+        # print(expression)
+        # print(first_number)
         operation = '-'
     elif '*' in expression:
-        expression = expression.replace(' ', '')
         expression = expression.split('*')
         first_number = expression[0]
         second_number = expression[1]
         operation = '*'
     elif '/' in expression:
-        expression = expression.replace(' ', '')
         expression = expression.split('/')
         first_number = expression[0]
         second_number = expression[1]
