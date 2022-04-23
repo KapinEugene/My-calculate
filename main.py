@@ -15,7 +15,7 @@ while(True):
             # print(i[1])
             count += 1
     try:
-        if count > 1:
+        if count > 1 or count == 0:
             raise ArithmeticError
     except ArithmeticError as e:
         print('Ошибка ввода выражения, попробуйте еще раз')
@@ -29,14 +29,6 @@ while(True):
         expression = expression.split('-')
         first_number = expression[0]
         second_number = expression[1]
-        # if expression[0] != '':
-        #     first_number = expression[0]
-        #     second_number = expression[1]
-        # else:
-        #     first_number = expression[0] + expression[1]
-        #     second_number = expression[2]
-        # print(expression)
-        # print(first_number)
         operation = '-'
     elif '*' in expression:
         expression = expression.split('*')
