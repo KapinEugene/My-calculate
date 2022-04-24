@@ -4,7 +4,8 @@ import re
 
 
 while(True):
-    count = 0
+    operationsList = ['+', '-', '*', '/']
+    operationsCount = 0
     is_arabic = True
     expression = input('Введите выражение: ')
     expression = expression.replace(' ', '')
@@ -12,34 +13,16 @@ while(True):
         if expression[i] == '+' or expression[i] == '-' or expression[i] == '*' or expression[i] == '/':
             if expression[0] == '-':
                 continue
-            # print(i[1])
-            count += 1
-    try:
-        if count > 1 or count == 0:
-            raise ArithmeticError
-    except ArithmeticError as e:
+            operationsCount += 1
+    if operationsCount > 1 or operationsCount == 0:
         print('Ошибка ввода выражения, попробуйте еще раз')
         continue
-    if '+' in expression:
-        expression = expression.split('+')
-        first_number = expression[0]
-        second_number = expression[1]
-        operation = '+'
-    elif '-' in expression:
-        expression = expression.split('-')
-        first_number = expression[0]
-        second_number = expression[1]
-        operation = '-'
-    elif '*' in expression:
-        expression = expression.split('*')
-        first_number = expression[0]
-        second_number = expression[1]
-        operation = '*'
-    elif '/' in expression:
-        expression = expression.split('/')
-        first_number = expression[0]
-        second_number = expression[1]
-        operation = '/'
+    for i in operationsList:
+        if i in expression:
+            expression = expression.split(i)
+            first_number = expression[0]
+            second_number = expression[1]
+            operation = i
     if (first_number.isdigit() and not second_number.isdigit()) or \
             (not first_number.isdigit() and second_number.isdigit()):
         print('Нельзя производить операцию с арабским и римским числом')
@@ -68,19 +51,12 @@ while(True):
         elif not is_arabic:
             print(roman.toRoman(test.multiplication()))
     elif operation == '/':
+        try:
+            test.division()
+        except ZeroDivisionError as e:
+            print('На ноль делить нельзя, попробуйте еще раз')
+            continue
         if is_arabic:
-            if second_number == 0:
-                try:
-                    test.division()
-                except ZeroDivisionError as e:
-                    print('На ноль делить нельзя, попробуйте еще раз')
-            else:
-                print(test.division())
-        elif not is_arabic:
-            if second_number == 0:
-                try:
-                    test.division()
-                except ZeroDivisionError as e:
-                    print('На ноль делить нельзя, попробуйте еще раз')
-            else:
-                print(roman.toRoman(int(test.division())))
+            print(test.division())
+        else:
+            print(roman.toRoman(int(test.division())))
