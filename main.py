@@ -2,9 +2,8 @@ from Calculate import Calculate
 import roman
 import re
 
-
+operationsList = ['+', '-', '*', '/']
 while(True):
-    operationsList = ['+', '-', '*', '/']
     operationsCount = 0
     is_arabic = True
     expression = input('Введите выражение: ')
@@ -34,29 +33,5 @@ while(True):
     elif first_number.isdigit() and second_number.isdigit():
         first_number = int(first_number)
         second_number = int(second_number)
-    test = Calculate(first_number, second_number)
-    if operation == '+':
-        if is_arabic:
-            print(test.addition())
-        elif not is_arabic:
-            print(roman.toRoman(test.addition()))
-    elif operation == '-':
-        if is_arabic:
-            print(test.substraction())
-        elif not is_arabic:
-            print(roman.toRoman(test.substraction()))
-    elif operation == '*':
-        if is_arabic:
-            print(test.multiplication())
-        elif not is_arabic:
-            print(roman.toRoman(test.multiplication()))
-    elif operation == '/':
-        try:
-            test.division()
-        except ZeroDivisionError as e:
-            print('На ноль делить нельзя, попробуйте еще раз')
-            continue
-        if is_arabic:
-            print(test.division())
-        else:
-            print(roman.toRoman(int(test.division())))
+    entered_expression = Calculate(first_number, second_number)
+    print(entered_expression.execute(operation, is_arabic))
