@@ -41,7 +41,7 @@ class Calculate():
             try:
                 self.division()
             except ZeroDivisionError as e:
-                print('На ноль делить нельзя, попробуйте еще раз')
+                return 'На ноль делить нельзя, попробуйте еще раз'
             if is_arabic:
                 rez = self.division()
             else:
