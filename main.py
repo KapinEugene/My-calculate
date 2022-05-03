@@ -27,6 +27,9 @@ while(True):
         print('Нельзя производить операцию с арабским и римским числом')
         continue
     elif not first_number.isdigit() and not second_number.isdigit():
+        if len(first_number) or len(second_number) >= 4:
+            print('В римской системе счисления не может быть 4-кратного повторения одной и той же цифры')
+            continue
         first_number = roman.fromRoman(first_number.upper())
         second_number = roman.fromRoman(second_number.upper())
         is_arabic = False

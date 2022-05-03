@@ -1,6 +1,7 @@
 import roman
 
-class Calculate():
+
+class Calculate(object):
     def __init__(self, first_number, second_number):
         self.first_number = first_number
         self.second_number = second_number
@@ -39,11 +40,10 @@ class Calculate():
                 rez = roman.toRoman(self.multiplication())
         elif operation == '/':
             try:
-                self.division()
+                if is_arabic:
+                    rez = self.division()
+                else:
+                    rez = roman.toRoman(int(self.division()))
             except ZeroDivisionError as e:
                 return 'На ноль делить нельзя, попробуйте еще раз'
-            if is_arabic:
-                rez = self.division()
-            else:
-                rez = roman.toRoman(int(self.division()))
         return rez
